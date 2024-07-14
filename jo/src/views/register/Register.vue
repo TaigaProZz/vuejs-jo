@@ -23,15 +23,15 @@
 
         <!-- {/* checkbox */} -->
         <div class="w-full flex items-center">
-          <input id="checkbox" type="checkbox" v-model="checkboxSelected" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:bg-gray-700 dark:border-gray-600" />
-          <label for="checkbox" class="text-text2 text-sm ml-2">J'accepte la<a @click="this.$router.push('/pdc')" class="text-creme"> politique de confidentialité</a></label>
+          <input id="checkbox" type="checkbox" v-model="checkboxSelected" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 cursor-pointer" />
+          <label for="checkbox" class="text-text2 text-sm ml-2">J'accepte la<a @click="this.$router.push('/pdc')" class="text-creme cursor-pointer"> politique de confidentialité</a></label>
         </div>
       </div>
 
       <!-- {/* sign up button */} -->
       <div class="w-full flex flex-col items-center gap-2">
         <PrimaryButton text="S'inscrire" type="submit" />
-        <p>Déjà inscrit ?<a @click="this.$router.push('/login')"><span class="underline underline-offset-2">Connectez-vous ici</span></a>
+        <p>Déjà inscrit ?<a @click="this.$router.push('/login')"><span class="underline underline-offset-2 ml-2 cursor-pointer">Connectez-vous ici</span></a>
         </p>
       </div>
     </form>
@@ -44,6 +44,7 @@ import { register } from "@/services/account.service";
 import PrimaryButton from "@/components/buttons/PrimaryButton.vue";
 import InputForm from "@/components/input/InputForm.vue";
 import { toast } from "vue3-toastify";
+import { showErrorPopup } from "../../utils/toast/toast";
 
 export default {
   name: 'Register',
@@ -84,19 +85,19 @@ export default {
       }
 
       // check if inputs are empty
-      if (!data.email || !data.password || !data.password1 || !data.surname || !data.name) return console.error('Veuillez remplir tous les champs.');
+      if (!data.email || !data.password || !data.password1 || !data.surname || !data.name) return showErrorPopup('Veuillez remplir tous les champs.');
 
       // validate email
-      if (!this.validateEmail(data.email)) return console.error("Veuillez entrer un email valide.");
+      if (!this.validateEmail(data.email)) return showErrorPopup("Veuillez entrer un email valide.");
 
       // check if password is strong : Minimum eight characters, at least one letter, one number and one special character
-      if (!this.passwordRegex.test(data.password)) return console.error("Le mot de passe n'est pas assez complexe.");
+      if (!this.passwordRegex.test(data.password)) return showErrorPopup("Le mot de passe n'est pas assez complexe.");
 
       // check if passwords match
-      if (data.password !== data.password1) return console.error('Les mots de passe ne sont pas identiques.');
+      if (data.password !== data.password1) return showErrorPopup('Les mots de passe ne sont pas identiques.');
 
       // check if checkbox is checked
-      if (!this.checkboxSelected) return console.error('Vous devez accepter la politique de confidentialité.');
+      if (!this.checkboxSelected) return showErrorPopup('Vous devez accepter la politique de confidentialité.');
 
       // delete unnecesseraly password 2
       delete data.password1;

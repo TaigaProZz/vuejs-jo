@@ -32,6 +32,7 @@ import PrimaryButton from "@/components/buttons/PrimaryButton.vue";
 import InputForm from '@/components/input/InputForm.vue';
 import { mapActions } from 'pinia';
 import { useUserStore } from '../../store';
+import { showErrorPopup } from '../../utils/toast/toast';
 
 export default {
   name: 'Login',
@@ -44,6 +45,10 @@ export default {
     return {
       email: '',
       password: '',
+      options:{
+        position: toast.POSITION.BOTTOM_RIGHT,
+        theme: toast.THEME.DARK
+      }
     }
   },
   methods: {
@@ -60,19 +65,22 @@ export default {
       };
 
       // check if inputs are not empty
-      if (!data.email || !data.password || !data.email && !data.password) return console.error('Veuillez remplir tous les champs.')
+      if (!data.email || !data.password || !data.email && !data.password) return showErrorPopup('Veuillez remplir tous les champs.')
 
       // print a toast for the promise
       try {
         const response = await toast.promise(
           login(data),
           {
-            loading: 'Connexion...',
+            pending: 'Connexion...',
             success: 'Connexion réussie !',
-            error: (err) => `Connexion échouée : ${err.response.data.message || ''}`,
-          }
+            error: {
+              render(error) {
+                return `Connexion échouée : ${error.response.data.message || ''}`
+              }
+            },
+          }, 
         );
-        console.log("scc");
         // update user store
         console.log(response);
         this.logUser(response);

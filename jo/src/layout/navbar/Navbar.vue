@@ -35,9 +35,9 @@
     <!-- user not logged in -->
     <template v-if="!isLoggedIn">
       <div class="navbar-item hidden lg:flex" :class="{ 'active': pathname === '/login' }">
-        <a class="h-full flex items-center hover:text-creme" to="/login">
+        <button class="h-full flex items-center hover:text-creme" @click="this.$router.push('/login')">
           Connexion
-        </a>
+        </button>
       </div>
       <div class="navbar-item">
         <button :class="{ 'bg-creme': pathname === '/register', 'bg-gray-300 hover:bg-creme': pathname !== '/register' }" class="text-text1 rounded-lg px-4 py-2" @click="this.$router.push('/register')">S'inscrire</button>
@@ -51,10 +51,10 @@
         <button class="h-full flex items-center cursor-pointer" @click="this.$router.push('/cart')">
           <div class="flex items-center justify-center relative">
             <p>Panier</p>
-            <img src="@/assets/icons/shopping-cart.svg" alt="cart" class="h-8 w-6 ml-2" />
-            <p class="absolute bottom-3 left-[4.7rem] font-bold rounded-full bg-creme h-7 w-7 flex items-center justify-center">
+            <img src="@/assets/icons/shopping-cart.svg" alt="cart" class="h-6 w-6 ml-2" />
+            <p class="absolute bottom-3 left-[4.7rem] font-bold rounded-full bg-creme h-7 w-7 flex items-center justify-center pt-0.5">
               <!-- {{ user.cartItems }} -->
-                2
+                {{ Object.keys(getCart).length === 0 ? "0" : "1"}}
             </p>
           </div>
         </button>
@@ -107,11 +107,11 @@
     <template v-for="(item, index) in navItems" :key="index">
 
       <div class="navbar-menu-item" :class="{ 'active': pathname === item.href }" @click="handleMenuClose">
-        <a class="w-full"
+        <button class="w-full"
           :class="{ 'text-warning': index === 1, 'text-danger': index === navItems.length - 1, 'text-foreground': index !== 1 && index !== navItems.length - 1 }"
-          :to="item.href" size="lg">
+          @click="gotoPage(item.href)" size="lg">
           {{ item.name }}
-        </a>
+        </button>
       </div>
     </template>
   </div>
@@ -119,6 +119,9 @@
 </template>
 
 <script>
+import { mapState } from 'pinia';
+import { useCartStore } from '../../stores/cart-module';
+
 import logo from '@/assets/logo/logo-jo.svg';
 import PrimaryButton from '../../components/buttons/PrimaryButton.vue';
 
@@ -156,6 +159,9 @@ export default {
     $route(to, from) {
       this.pathname = to.path;
     },
+  },
+  computed: {
+    ...mapState(useCartStore, ['getCart']),
   },
   methods: {
     gotoPage(page) {

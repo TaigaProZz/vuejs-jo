@@ -1,8 +1,8 @@
 <template>
-<div class="flex flex-col h-[65px] w-full px-3 py-1 bg-graySecondary rounded-lg dark drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)] ">
-  <label :for="placeholder" class="text-sm">{{ label }}<span class="text-red-500 text-lg">*</span></label>
+<div class="flex flex-col h-[65px] w-full px-3 py-1 bg-graySecondary rounded-lg dark drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]">
+  <label :for="placeholder" class="text-sm" :class="required ? '' : 'pt-2'" >{{ label }}<span v-if="required" class="text-red-500 text-lg">*</span></label>
 
-  <input :id="placeholder" :type="type" :placeholder="placeholder" class="bg-transparent text-sm" v-model="inputValue">
+  <input :id="placeholder" :type="type" :placeholder="placeholder" :disabled="disabled" class="bg-transparent text-sm" v-model="inputValue">
 </div>
 
 
@@ -16,7 +16,9 @@ export default {
     type: String,
     label: String,
     placeholder: String,
-    modelValue: String
+    modelValue: String,
+    disabled: Boolean,
+    required: Boolean,
   },
   computed: {
     inputValue: {

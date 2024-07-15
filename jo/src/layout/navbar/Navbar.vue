@@ -72,7 +72,7 @@
         <div v-if="isDropdownOpen" class="z-50 bg-white w-[200px] -translate-x-44 p-2 py-4 gap-4 absolute flex flex-col justify-between rounded-lg">
           
           <!-- first part with email-->
-          <div class="h-14 gap-3 cursor-pointer px-2 hover:bg-gray-100" to="/profile" @click="gotoPage('/profile')">
+          <div class="h-14 gap-3 cursor-pointer px-2 hover:bg-gray-100" to="/account" @click="gotoPage('/account')">
             <p class="font-semibold text-text1">Connecté avec</p>
             <p class="font-semibold text-text1">{{ user.name }}</p>
           </div>
@@ -146,7 +146,7 @@ export default {
       ],
 
       dropdownItems: [
-        { name: 'Mon Profil', href: '/profile' },
+        { name: 'Mon Profil', href: '/account' },
         { name: 'Mes Achats', href: '/purchases' },
         { name: 'Mon Panier', href: '/cart' }
       ]

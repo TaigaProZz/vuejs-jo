@@ -6,7 +6,10 @@ const routes = [
   { path: "/login", name: "login", component: () => import("../views/login/Login.vue") },
   { path: "/register", name: "register", component: () => import("../views/register/Register.vue") },
   { path: "/about", name: "about", component: () => import("../views/about/About.vue") },
-  { path: "/cart", name: "cart", component: () => import("../views/cart/Cart.vue") },
+  { path: "/cart", name: "cart", component: () => import("../views/account-views/AccountViews.vue") },
+  { path: "/profile", name: "profile", component: () => import("../views/account-views/AccountViews.vue") },
+  { path: "/transactions", name: "transactions", component: () => import("../views/account-views/AccountViews.vue") },
+
 
 ];
 

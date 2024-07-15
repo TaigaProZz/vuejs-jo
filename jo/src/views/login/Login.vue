@@ -84,7 +84,7 @@ export default {
         // update user store
         console.log(response);
         this.logUser(response);
-        this.$router.push('/profile')
+        this.$router.push('/account')
       } catch (err) { }
     }
   }

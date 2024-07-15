@@ -35,9 +35,9 @@
     <!-- user not logged in -->
     <template v-if="!isLoggedIn">
       <div class="navbar-item hidden lg:flex" :class="{ 'active': pathname === '/login' }">
-        <RouterLink class="h-full flex items-center hover:text-creme" to="/login">
+        <a class="h-full flex items-center hover:text-creme cursor-pointer" @click="this.$router.push('/login')">
           Connexion
-        </RouterLink>
+        </a>
       </div>
       <div class="navbar-item">
         <button :class="{ 'bg-creme': pathname === '/register', 'bg-gray-300 hover:bg-creme': pathname !== '/register' }" class="text-text1 rounded-lg px-4 py-2" @click="this.$router.push('/register')">S'inscrire</button>
@@ -69,10 +69,10 @@
         </button>
 
         <!-- dropdown menu -->
-        <div v-if="isDropdownOpen" class="bg-white w-[200px] -translate-x-44 p-2 py-4 gap-4 absolute flex flex-col justify-between rounded-lg">
+        <div v-if="isDropdownOpen" class="z-50 bg-white w-[200px] -translate-x-44 p-2 py-4 gap-4 absolute flex flex-col justify-between rounded-lg">
           
           <!-- first part with email-->
-          <div class="h-14 gap-3 cursor-pointer px-2 hover:bg-gray-100" to="/profile" @click="this.$router.push('/profile')">
+          <div class="h-14 gap-3 cursor-pointer px-2 hover:bg-gray-100" to="/profile" @click="gotoPage('/profile')">
             <p class="font-semibold text-text1">Connecté avec</p>
             <p class="font-semibold text-text1">{{ user.name }}</p>
           </div>
@@ -82,7 +82,7 @@
           <!-- items for redirection -->
           <div class="flex flex-col">
             <ul v-for="(item, index) in dropdownItems" :key="index">
-              <li class="h-full py-1.5 px-2 dropdown-item text-text1 cursor-pointer w-full text-left hover:font-semibold hover:bg-gray-100 rounded-lg" @click="this.$router.push(item.href)">
+              <li class="h-full py-1.5 px-2 dropdown-item text-text1 cursor-pointer w-full text-left hover:font-semibold hover:bg-gray-100 rounded-lg" @click="gotoPage(item.href)">
                 {{ item.name }}
               </li>
             </ul>
@@ -146,7 +146,7 @@ export default {
       ],
 
       dropdownItems: [
-        { name: 'Mon Compte', href: '/profile' },
+        { name: 'Mon Profil', href: '/profile' },
         { name: 'Mes Achats', href: '/purchases' },
         { name: 'Mon Panier', href: '/cart' }
       ]
@@ -158,6 +158,10 @@ export default {
     },
   },
   methods: {
+    gotoPage(page) {
+      this.$router.push(page);
+      this.handleDropdownClose();
+    },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
@@ -176,13 +180,14 @@ export default {
 
     logout() {
       // logout logic here
+      this.handleDropdownClose();
     },
   },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside);
-  },
-  beforeDestroy() {
-    document.removeEventListener('click', this.handleClickOutside);
-  },
+  // mounted() {
+  //   document.addEventListener('click', this.handleClickOutside);
+  // },
+  // beforeDestroy() {
+  //   document.removeEventListener('click', this.handleClickOutside);
+  // },
 };
 </script>

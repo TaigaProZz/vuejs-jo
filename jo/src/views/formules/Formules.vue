@@ -4,16 +4,18 @@
   <div className="flex justify-center">
     <ul className="flex flex-col md:flex-wrap md:flex-row gap-20 mt-20 ">
       <li v-for="(item, index) in tickets" :key="index">
-        <TicketCard :ticket="item" />
+        <TicketCard :ticket="item" @add-cart="handleAddCart" />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'pinia';
 import MainTitle from '../../layout/main-title/MainTitle.vue';
 import fetchTickets from '../../services/ticket.service';
 import TicketCard from '@/components/cards/TicketCard.vue';
+import { useCartStore } from '../../stores/cart-module';
 
 export default {
   name: 'Formules',
@@ -31,6 +33,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(useCartStore, ['addItem']),
     async getTickets() {
       try {
         this.isLoading = true;
@@ -40,6 +43,9 @@ export default {
       } finally {
         this.isLoading = false;
       }
+    },
+    handleAddCart(ticket) {
+      return this.addItem(ticket);
     }
   },
   async mounted() {

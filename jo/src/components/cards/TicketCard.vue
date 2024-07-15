@@ -19,7 +19,7 @@
   <div class="flex flex-col gap-[15px] text-center">
     <PrimaryButton text="Acheter" @click="this.$router.push(`formules/${ticket.id}`)" />
     <!--  add to cart  -->
-    <p class="cursor-pointer">Ajouter au panier</p>
+    <p class="cursor-pointer" @click="addCart">Ajouter au panier</p>
   </div>
 </div>
 </template>
@@ -36,6 +36,11 @@ export default {
     ticket: {
       type: Object,
       default: {}
+    }
+  },
+  methods: {
+    addCart() {
+      this.$emit('add-cart', this.ticket);
     }
   }
   

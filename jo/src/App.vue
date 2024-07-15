@@ -4,7 +4,7 @@ import Navbar from './layout/navbar/Navbar.vue';
 import Footer from './layout/footer/Footer.vue';
 import getUser from './services/user.service';
 import { mapActions, mapState } from 'pinia';
-import { useUserStore } from './store';
+import { useUserStore } from './stores/user-module';
 
 export default {
   components: {

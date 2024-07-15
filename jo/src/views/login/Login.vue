@@ -31,7 +31,7 @@ import { login } from "@/services/account.service";
 import PrimaryButton from "@/components/buttons/PrimaryButton.vue";
 import InputForm from '@/components/input/InputForm.vue';
 import { mapActions } from 'pinia';
-import { useUserStore } from '../../store';
+import { useUserStore } from '../../stores/user-module';
 import { showErrorPopup } from '../../utils/toast/toast';
 
 export default {

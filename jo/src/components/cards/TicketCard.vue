@@ -14,7 +14,7 @@
     <p>{{ ticket.numberOfPersonsAdmission }} {{ ticket.numberOfPersonsAdmission > 1 ? `personnes` : "personne" }}</p>
   </div>
   <!--  description  -->
-  <p class="h-full">{{ ticket.description }}</p>
+  <p class="h-full text-[14px]">{{ ticket.description }}</p>
   <!--  buy button  -->
   <div class="flex flex-col gap-[15px] text-center">
     <PrimaryButton text="Acheter" @click="this.$router.push(`formules/${ticket.id}`)" />

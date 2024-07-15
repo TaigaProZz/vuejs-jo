@@ -42,7 +42,7 @@ export default {
 <template>
   <div class="min-h-screen flex flex-col items-center bg-radial-custom-gradient">
     <Navbar :user="getUser" :isLoggedIn="getIsLoggedIn" />
-    <main class="flex-grow w-full p-6 md:w-10/12 mb-16">
+    <main class="flex-grow w-full p-6 md:w-8/12 mb-16">
       <p v-if="isLoading">loading...</p>
       <RouterView v-else :user="getUser" />
     </main>

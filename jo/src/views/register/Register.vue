@@ -31,7 +31,7 @@
       <!-- {/* sign up button */} -->
       <div class="w-full flex flex-col items-center gap-2">
         <PrimaryButton text="S'inscrire" type="submit" />
-        <p>Déjà inscrit ?<a @click="this.$router.push('/login')"><span class="underline underline-offset-2 ml-2 cursor-pointer">Connectez-vous ici</span></a>
+        <p>Déjà inscrit ?<button type="button" @click="this.$router.push('/login')"><span class="underline underline-offset-2 ml-2 cursor-pointer">Connectez-vous ici</span></button>
         </p>
       </div>
     </form>

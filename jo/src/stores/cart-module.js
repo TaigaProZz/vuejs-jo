@@ -6,7 +6,7 @@ export const useCartStore = defineStore('cartStore', {
   }),
   getters: {
     getCart(state) {
-      localStorage.getItem('cart') ? state.cart = JSON.parse(localStorage.getItem('cart')) : state.cart = [];
+      localStorage.getItem('cart') ? state.cart = JSON.parse(localStorage.getItem('cart')) : state.cart = {};
       return state.cart;
     },
   },
@@ -20,6 +20,7 @@ export const useCartStore = defineStore('cartStore', {
       return this.cart = data;
     },
     removeItem() {
+      localStorage.removeItem('cart');
       return this.cart = {};
     }
  

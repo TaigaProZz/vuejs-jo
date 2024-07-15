@@ -1,19 +1,50 @@
-<template><!--  hero page image  -->
-<div>
-  ss
-</div>  
+<template>
+<MainTitle title="Nos tickets" />
+<!-- {/* List of TicketCard */} -->
+<div className="flex justify-center">
+  <ul className="flex flex-col md:flex-wrap md:flex-row gap-20 mt-20 ">
+    <li v-for="(item, index) in tickets" :key="index">
+      <TicketCard :ticket="item" />
+    </li>
+  </ul>
+</div>
 </template>
 
 <script>
-import HeroButton from '../../components/buttons/HeroButton.vue';
-import SportCard from '../../components/cards/SportCard.vue';
+import MainTitle from '../../layout/main-title/MainTitle.vue';
+import fetchTickets from '../../services/ticket.service';
+import TicketCard from '@/components/cards/TicketCard.vue';
+
 export default {
   name: 'Formules',
   components: {
-    HeroButton,
-    SportCard
-    
+    MainTitle,
+    TicketCard
   },
-
+  props: {
+    tickets: Array,
+  },
+  data() {
+    return {
+      tickets: [],
+      isLoading: true
+    }
+  },
+  methods: {
+    async getTickets() {
+      try {
+        this.isLoading = true;
+        this.tickets = await fetchTickets();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.isLoading = false;
+      }
+    }
+  },
+  async mounted() {
+    await this.getTickets();
+  },
 }
+
 </script>

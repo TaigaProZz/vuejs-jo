@@ -22,7 +22,7 @@ export default {
     PrimaryButton
   },
   props: {
-   path: String
+    path: String
   },
   data() {
     return {
@@ -31,13 +31,7 @@ export default {
         { name: 'Mes Achats', href: '/transactions' }, 
         { name: 'Mon Panier', href: '/cart' }
       ],
-      path: '',
     }
-  },
-  watch: {
-    $route(to, from) {
-      this.pathname = to.path;
-    },
   },
   methods: {
     

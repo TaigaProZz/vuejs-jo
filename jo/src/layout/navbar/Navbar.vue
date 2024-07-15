@@ -35,7 +35,7 @@
     <!-- user not logged in -->
     <template v-if="!isLoggedIn">
       <div class="navbar-item hidden lg:flex" :class="{ 'active': pathname === '/login' }">
-        <a class="h-full flex items-center hover:text-creme cursor-pointer" @click="this.$router.push('/login')">
+        <a class="h-full flex items-center hover:text-creme" to="/login">
           Connexion
         </a>
       </div>
@@ -48,7 +48,7 @@
     <template v-else>
       <!-- cart item -->
       <div class="navbar-item hidden sm:flex mr-6 pt-1" :class="{ 'active': pathname === '/cart' }">
-        <a class="h-full flex items-center cursor-pointer" @click="this.$router.push('/cart')">
+        <button class="h-full flex items-center cursor-pointer" @click="this.$router.push('/cart')">
           <div class="flex items-center justify-center relative">
             <p>Panier</p>
             <img src="@/assets/icons/shopping-cart.svg" alt="cart" class="h-8 w-6 ml-2" />
@@ -57,7 +57,7 @@
                 2
             </p>
           </div>
-        </a>
+        </button>
       </div>
 
       <!-- avatar dropdown -->
@@ -72,7 +72,7 @@
         <div v-if="isDropdownOpen" class="z-50 bg-white w-[200px] -translate-x-44 p-2 py-4 gap-4 absolute flex flex-col justify-between rounded-lg">
           
           <!-- first part with email-->
-          <div class="h-14 gap-3 cursor-pointer px-2 hover:bg-gray-100" to="/account" @click="gotoPage('/account')">
+          <div class="h-14 gap-3 cursor-pointer px-2 hover:bg-gray-100" to="/profile" @click="gotoPage('/profile')">
             <p class="font-semibold text-text1">Connecté avec</p>
             <p class="font-semibold text-text1">{{ user.name }}</p>
           </div>
@@ -146,8 +146,8 @@ export default {
       ],
 
       dropdownItems: [
-        { name: 'Mon Profil', href: '/account' },
-        { name: 'Mes Achats', href: '/purchases' },
+        { name: 'Mon Profil', href: '/profile' },
+        { name: 'Mes Achats', href: '/transactions' },
         { name: 'Mon Panier', href: '/cart' }
       ]
     }

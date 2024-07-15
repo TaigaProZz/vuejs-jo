@@ -1,13 +1,13 @@
 <template>
-<MainTitle title="Nos tickets" />
-<!-- {/* List of TicketCard */} -->
-<div className="flex justify-center">
-  <ul className="flex flex-col md:flex-wrap md:flex-row gap-20 mt-20 ">
-    <li v-for="(item, index) in tickets" :key="index">
-      <TicketCard :ticket="item" />
-    </li>
-  </ul>
-</div>
+  <MainTitle title="Nos tickets" />
+  <!-- {/* List of TicketCard */} -->
+  <div className="flex justify-center">
+    <ul className="flex flex-col md:flex-wrap md:flex-row gap-20 mt-20 ">
+      <li v-for="(item, index) in tickets" :key="index">
+        <TicketCard :ticket="item" />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ export default {
     TicketCard
   },
   props: {
-    tickets: Array,
+    user: Object
   },
   data() {
     return {

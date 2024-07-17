@@ -2,9 +2,9 @@
   
   <div class="flex flex-col gap-10">
     <h1 class="text-4xl font-bold">Mon Profil</h1>
-    <InputForm type="email" label="Email" :disabled="true" :required="false" v-model="user.email" />
-    <InputForm type="text" label="Nom" :disabled="true" :required="false" v-model="user.surname" />
-    <InputForm type="text" label="Prénom" :disabled="true" :required="false" v-model="user.name" />
+    <InputForm type="email" label="Email" :disabled="true" :notRequired="true" v-model="user.email" />
+    <InputForm type="text" label="Nom" :disabled="true" :notRequired="true" v-model="user.surname" />
+    <InputForm type="text" label="Prénom" :disabled="true" :notRequired="true" v-model="user.name" />
   </div>
 </template>
 

@@ -43,7 +43,7 @@ export default  {
       secondSideElements: [
         { name: "A propos", href: "/about" },
         { name: "Formules", href: "/formules" },
-        { name: "Mon profil", href: "/account" },
+        { name: "Mon profil", href: "/profile" },
         { name: "© Copyright 2024. Made by Taiga ProZz", href: "https://github.com/taigaprozz/" },
       ]
     }

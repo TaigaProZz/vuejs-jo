@@ -1,4 +1,4 @@
-import { createMemoryHistory, createRouter } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   { path: "/", name: "home", component: () => import("../views/home/Home.vue") },
@@ -9,12 +9,14 @@ const routes = [
   { path: "/cart", name: "cart", component: () => import("../views/account-views/AccountViews.vue") },
   { path: "/profile", name: "profile", component: () => import("../views/account-views/AccountViews.vue") },
   { path: "/transactions", name: "transactions", component: () => import("../views/account-views/AccountViews.vue") },
+  { path: "/payment-accepted", name: "PaymentAccepted", component: () => import("../views/payment-status/PaymentAccepted.vue") },
+  { path: "/payment-refused", name: "PaymentRefused", component: () => import("../views/payment-status/PaymentRefused.vue") },
 
 
 ];
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });
 

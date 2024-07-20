@@ -5,7 +5,7 @@
     <h2 class="text-[20px] font-bold">{{ item.ticket.name }}</h2>
     <p class="text-sm"> {{ handleDate(item.date) }} </p>
   </div>
-  <div class="flex justify-between">
+  <div class="flex justify-between items-end">
     <p class="ml-1 text-sm w-10/12">{{ item.ticket.description }}</p>
     <img src="@/assets/icons/download.svg" alt="download ticket" class="w-6 h-6 cursor-pointer" @click="downloadTicket" />
   </div>

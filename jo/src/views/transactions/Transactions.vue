@@ -36,19 +36,14 @@ export default {
           return
         }
 
-      const qrcodeDataUrl = await this.generateQRCode('http://localhost:3000/qrcode/', ticket.finalKey)
+      // generate QR code
+      const qrcodeDataUrl = await this.generateQRCode(ticket.finalKey)
 
       if (qrcodeDataUrl) {
+        // create PDF
         const pdf = new jsPDF()
-
-        // Ajouter du texte au PDF si nécessaire
         pdf.text('Voici votre QR code :', 10, 20)
-
-        // Ajouter le QR code à la page du PDF
         pdf.addImage(qrcodeDataUrl, 'PNG', 0, 25, 80, 80)
-
-  
-        // Télécharger le PDF
         pdf.save('ticket.pdf')
       }
     },

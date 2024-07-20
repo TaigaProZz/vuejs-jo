@@ -57,7 +57,6 @@ export default {
     async formHandler (event) {
       event.preventDefault();
 
-      console.log(this.email, this.password);
       // get data from inputs
       const data = {
         email: this.email.toLowerCase(),
@@ -76,7 +75,7 @@ export default {
             success: 'Connexion réussie !',
             error: {
               render(error) {
-                return `Connexion échouée : ${error.response.data.message || ''}`
+                return `Connexion échouée : ${error.response.data.message || 'Connexion échouée'}`
               }
             },
           }, 

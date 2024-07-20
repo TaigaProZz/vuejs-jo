@@ -1,7 +1,7 @@
 <template>
   <div class="h-[50rem] flex items-center justify-center">
     <form :onSubmit="formHandler"
-      class="rounded-lg flex justify-between gap-4 items-center px-10 pt-6 pb-6 flex-col h-[43rem] w-full bg-radial-custom-gradient drop-shadow-[0_4px_8px_rgba(0,0,0,0.65)] md:w-96 md:pt-10">
+      class="rounded-lg flex justify-between gap-4 items-center px-10 pt-6 pb-6 flex-col h-[44rem] w-full bg-radial-custom-gradient drop-shadow-[0_4px_8px_rgba(0,0,0,0.65)] md:w-96 md:pt-10">
       <div class="w-full flex flex-col items-center gap-6 ">
         <h1 class="text-2xl font-bold drop-shadow-[0_6px_8px_rgba(0,0,0,0.)] ">S'inscrire</h1>
         <!-- {/* email */} -->
@@ -10,8 +10,12 @@
         />
 
         <!-- {/* passwords */} -->
-        <InputForm type="password" label="Mot de passe" labelPlacement="inside" description='Le mot de passe doit contenir au moins 8 caractères, une lettre, un nombre et un caractère spécial.'
-          placeholder="Entrez votre mot de passe" class="dark drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]" v-model="password" />
+        <div>
+          <InputForm type="password" label="Mot de passe" labelPlacement="inside" description=''
+            placeholder="Entrez votre mot de passe" class="dark drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]" v-model="password" />
+          <p class="text-[12px] mt-2 ml-1 text-[#71717A]">Le mot de passe doit contenir au moins 8 caractères, une lettre, un nombre et un caractère spécial.</p>
+        </div>
+       
         <InputForm isRequired type="password" label="Répéter mot de passe"
           placeholder="Confirmez votre mot de passe" class="dark drop-shadow-[0_4px_8px_rgba(0,0,0,0.45)]" v-model="password1" />
 
@@ -64,8 +68,8 @@ export default {
 
       // regexs
       emailRegex: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+      // minimum eight characters, at least one letter, one number and one special character
       passwordRegex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-
     }
   },
   methods: {

@@ -26,7 +26,7 @@
           {{ item.price }}€</p>
 
         <!-- buy -->
-        <p @click="buyTicket" class="text-[16px] py-1.5 px-8 w-fit h-fit flex justify-center bg-creme text-text1 rounded-lg font-semibold cursor-pointer hover:bg-opacity-70">
+        <p @click="buy" class="text-[16px] py-1.5 px-8 w-fit h-fit flex justify-center bg-creme text-text1 rounded-lg font-semibold cursor-pointer hover:bg-opacity-70">
           Acheter
         </p>
       </div>
@@ -37,6 +37,10 @@
 </template>
 
 <script>
+import { mapState } from 'pinia';
+import { useUserStore } from '@/stores/user-module';
+import { buyTicket } from '../../services/ticket.service';
+import { showErrorPopup } from '../../utils/toast/toast';
 
 export default {
   name: 'CartCard',
@@ -45,11 +49,21 @@ export default {
       type: Object,
     }
   },
+  computed: {
+    ...mapState(useUserStore, ['isLoggedIn'])
+  },
   methods: {
-    buyTicket() {
-      this.$emit('buy-ticket', this.item);
+    async buy() {
+      try {
+        if (!this.isLoggedIn) {
+          return showErrorPopup('Vous devez vous connecter pour acheter un ticket');
+        }
+        await buyTicket(this.item.stripeProductId);
+      } catch (error) {
+        showErrorPopup('Une erreur est survenue lors de l\'achat du ticket. Veuillez réessayer plus tard');
+        console.error(error);
+      }
     },
-
     deleteCart() {
       this.$emit('delete-cart', this.item);
     }

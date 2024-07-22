@@ -12,10 +12,10 @@
 
 <script>
 import { mapActions } from 'pinia';
-import MainTitle from '../../layout/main-title/MainTitle.vue';
-import fetchTickets from '../../services/ticket.service';
-import TicketCard from '@/components/cards/TicketCard.vue';
+import { fetchTickets } from '../../services/ticket.service';
 import { useCartStore } from '../../stores/cart-module';
+import TicketCard from '@/components/cards/TicketCard.vue';
+import MainTitle from '../../layout/main-title/MainTitle.vue';
 
 export default {
   name: 'Formules',

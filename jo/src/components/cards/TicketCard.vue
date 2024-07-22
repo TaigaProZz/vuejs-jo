@@ -17,7 +17,7 @@
   <p class="h-full text-[14px]">{{ ticket.description }}</p>
   <!--  buy button  -->
   <div class="flex flex-col gap-[15px] text-center">
-    <PrimaryButton text="Acheter" @click="this.$router.push(`formules/${ticket.id}`)" />
+    <PrimaryButton text="Acheter" @click="buy" />
     <!--  add to cart  -->
     <p class="cursor-pointer" @click="addCart">Ajouter au panier</p>
   </div>
@@ -25,7 +25,11 @@
 </template>
 
 <script>
+import { mapState } from "pinia";
+import { useUserStore } from '@/stores/user-module';
 import PrimaryButton from "../buttons/PrimaryButton.vue";
+import { buyTicket } from "../../services/ticket.service";
+import { showErrorPopup } from "../../utils/toast/toast";
 
 export default {
   name: 'TicketCard',
@@ -38,7 +42,21 @@ export default {
       default: {}
     }
   },
+  computed: {
+    ...mapState(useUserStore, ['isLoggedIn'])
+  },
   methods: {
+    async buy() {
+      try {
+        if (!this.isLoggedIn) {
+          return showErrorPopup('Vous devez vous connecter pour acheter un ticket');
+        }
+        await buyTicket(this.ticket.stripeProductId);
+      } catch (error) {
+        showErrorPopup('Une erreur est survenue lors de l\'achat du ticket. Veuillez réessayer plus tard');
+        console.error(error);
+      }
+    },
     addCart() {
       this.$emit('add-cart', this.ticket);
     }

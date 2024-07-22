@@ -27,12 +27,11 @@
 <script>
 import { toast } from 'vue3-toastify';
 import { login } from "@/services/account.service";
-
-import PrimaryButton from "@/components/buttons/PrimaryButton.vue";
-import InputForm from '@/components/input/InputForm.vue';
 import { mapActions } from 'pinia';
 import { useUserStore } from '../../stores/user-module';
 import { showErrorPopup } from '../../utils/toast/toast';
+import PrimaryButton from "@/components/buttons/PrimaryButton.vue";
+import InputForm from '@/components/input/InputForm.vue';
 
 export default {
   name: 'Login',
@@ -81,9 +80,8 @@ export default {
           }, 
         );
         // update user store
-        console.log(response);
         this.logUser(response);
-        this.$router.push('/account')
+        this.$router.push('/profile')
       } catch (err) { }
     }
   }

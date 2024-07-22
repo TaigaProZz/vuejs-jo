@@ -1,12 +1,10 @@
 <template>
-<!-- <button @click="notify">ssss</button> -->
-
 <!--  hero page image  -->
 <div class="h-hero w-full flex flex-col items-center justify-center gap-10 sm:flex-row sm:gap-12 md:gap-20">
   <!--  main title  -->
   <div class="flex sm:h-full sm:w-4/12 flex-col items-center justify-center">
     <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 text-center">JEUX OLYMPIQUES<br />DE PARIS<br />2024</h1>
-    <HeroButton text="Réserver son ticket" @click="this$router.push('/formules')"/>
+    <HeroButton text="Réserver son ticket" @click="this.$router.push('/formules')"/>
   </div>
   <!--  image  -->
   <div class="h-30 md:min-w-[300px] max-w-[800px]">
@@ -41,7 +39,6 @@
 </template>
 
 <script>
-import { toast } from 'vue3-toastify';
 import HeroButton from '../../components/buttons/HeroButton.vue';
 import SportCard from '../../components/cards/SportCard.vue';
 import MainTitle from '../../layout/main-title/MainTitle.vue';
@@ -56,13 +53,6 @@ export default {
   props: {
     user: Object
   },
-  methods: {
-    notify () {
-      toast('Wow so easy !');
-    }
-  },
-
-
   data() {
     return {
       dayOneSports: [

@@ -31,6 +31,20 @@
 
   <!-- login and register buttons or user menu -->
   <div class="flex gap-5 justify-end">
+    <!-- cart item -->
+    <div class="hidden sm:flex mr-6 pt-1" :class="{ 'active': pathname === '/cart' }">
+      <button class="h-full flex items-center cursor-pointer" @click="this.$router.push('/cart')">
+        <div class="flex items-center justify-center relative">
+          <p>Panier</p>
+          <img src="@/assets/icons/shopping-cart.svg" alt="cart" class="h-6 w-6 ml-2" />
+          <p
+            class="absolute bottom-3 left-[4.7rem] font-bold rounded-full bg-creme h-7 w-7 flex items-center justify-center pt-0.5">
+            <!-- {{ user.cartItems }} -->
+            {{ Object.keys(getCart).length === 0 ? "0" : "1" }}
+          </p>
+        </div>
+      </button>
+    </div>
 
     <!-- user not logged in -->
     <template v-if="!isLoggedIn">
@@ -46,20 +60,6 @@
 
     <!-- user logged in  -->
     <template v-else>
-      <!-- cart item -->
-      <div class="navbar-item hidden sm:flex mr-6 pt-1" :class="{ 'active': pathname === '/cart' }">
-        <button class="h-full flex items-center cursor-pointer" @click="this.$router.push('/cart')">
-          <div class="flex items-center justify-center relative">
-            <p>Panier</p>
-            <img src="@/assets/icons/shopping-cart.svg" alt="cart" class="h-6 w-6 ml-2" />
-            <p class="absolute bottom-3 left-[4.7rem] font-bold rounded-full bg-creme h-7 w-7 flex items-center justify-center pt-0.5">
-              <!-- {{ user.cartItems }} -->
-                {{ Object.keys(getCart).length === 0 ? "0" : "1"}}
-            </p>
-          </div>
-        </button>
-      </div>
-
       <!-- avatar dropdown -->
       <!-- container -->
       <div class="pt-2" ref="targetElement">

@@ -14,11 +14,19 @@ export default {
   data() {
     return {
       isLoading: false,
-      user: {}
+      user: {},
+      hideLayout: false
     }
   },
   computed: {
     ...mapState(useUserStore, ['getUser', 'getIsLoggedIn'])
+  },
+  watch: {
+    // hide layout if on login page 
+    $route(to, from) {
+      console.log(to.path);
+      this.hideLayout = to.path === '/double-auth-qrcode';
+    }
   },
   methods: {
     ...mapActions(useUserStore, ['logUser']),
@@ -41,12 +49,12 @@ export default {
 
 <template>
   <div class="min-h-screen flex flex-col items-center bg-radial-custom-gradient">
-    <Navbar :user="getUser" :isLoggedIn="getIsLoggedIn" />
+    <Navbar v-if="!hideLayout" :user="getUser" :isLoggedIn="getIsLoggedIn" />
     <main class="flex-grow w-full p-6 md:w-8/12 mb-16">
       <p v-if="isLoading">loading...</p>
       <RouterView v-else :user="getUser" />
     </main>
-    <Footer />
+    <Footer v-if="!hideLayout" />
   </div>
 
 </template>

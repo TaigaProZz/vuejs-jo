@@ -23,6 +23,10 @@ export const useUserStore = defineStore('userStore', {
     async logUser(data) {
       this.addUser(data);
       this.handleIsLoggedIn(true);
-    }
+    },
+    async logoutUser() {
+      this.addUser({});
+      this.handleIsLoggedIn(false);
+    },
   },
 })

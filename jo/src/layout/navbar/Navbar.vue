@@ -92,7 +92,7 @@
 
           <!-- log out button -->
           <div>
-            <button class="dropdown-item w-full text-left text-red-600 py-1.5 px-2 hover:font-semibold hover:bg-red-100 rounded-lg" @click="logout">
+            <button class="dropdown-item w-full text-left text-red-600 py-1.5 px-2 hover:font-semibold hover:bg-red-100 rounded-lg" @click="logoutClick">
               Déconnexion
             </button>
           </div>
@@ -121,6 +121,7 @@
 <script>
 import { mapState } from 'pinia';
 import { useCartStore } from '../../stores/cart-module';
+import { logout } from '../../services/account.service';
 
 import logo from '@/assets/logo/logo-jo.svg';
 import PrimaryButton from '../../components/buttons/PrimaryButton.vue';
@@ -184,8 +185,9 @@ export default {
       }
     },
 
-    logout() {
+    async logoutClick() {
       // logout logic here
+      await logout();
       this.handleDropdownClose();
     },
   },

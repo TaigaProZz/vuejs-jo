@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import getUser from '../../services/user.service';
 import HeroButton from '../../components/buttons/HeroButton.vue';
 import SportCard from '../../components/cards/SportCard.vue';
 import MainTitle from '../../layout/main-title/MainTitle.vue';
@@ -23,6 +24,9 @@ import PrimaryButton from '../../components/buttons/PrimaryButton.vue';
 import InputForm from '../../components/input/InputForm.vue';
 import { axiosBase } from '../../services/axios';
 import { verifyOtp, logout } from '../../services/account.service';
+import { showErrorPopup } from '../../utils/toast/toast';
+import { mapActions } from 'pinia';
+import { useUserStore } from '../../stores/user-module';
 
 export default {
   name: 'DoubleAuthQrCode',
@@ -56,6 +60,7 @@ export default {
     this.generateQRCode();
   },
   methods: {
+    ...mapActions(useUserStore, ['handleRemoveDoubleAuthSetup', 'addUser']),
     async logoutClick() {
       await logout();
       this.$router.push('/login');
@@ -67,8 +72,20 @@ export default {
     },
     async formHandler(event) {
       event.preventDefault();
-      console.log(this.otpCode);
-      const res = await verifyOtp(this.otpCode);
+      try {
+        if (!this.otpCode) {
+          return showErrorPopup('Veuillez entrer le code de vérification.');
+        }
+        const res = await verifyOtp(this.otpCode);
+        if (res.data === '2FA successfully verified.') {
+          // handle store
+          this.handleRemoveDoubleAuthSetup();
+          this.addUser(await getUser());
+          this.$router.push('/profile');
+        }
+      } catch (error) {
+        showErrorPopup('Code de vérification incorrect.');
+      }
       console.log(res);
     }
   },

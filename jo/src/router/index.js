@@ -23,45 +23,41 @@ const router = createRouter({
 });
 
 router.beforeResolve((to, from, next) => {
-  // redirect to login page if user is not logged in and tries to access a restricted page
-  const publicPages = ["/login", "/register", "/about", "/cart", "/formules", "/", "/payment-accepted", "/payment-refused"];
-  const authRequired = !publicPages.includes(to.path);
-
-  const notAccessiblePagesLoggedin = ["/login", "/register"];
-  const loggedInPages = notAccessiblePagesLoggedin.includes(to.path);
-
-  const doubleAuthPage = ["/double-auth-qrcode"];
-  const doubleAuthRequired = doubleAuthPage.includes(to.path);
-
   // get user from store
   const userStore = useUserStore();
   const loggedIn = userStore.getIsLoggedIn;
-  const doubleAuthActive = userStore.getUser.doubleAuthActive;
-  console.log("double auth active: ", doubleAuthActive);
-  console.log(doubleAuthRequired);
-  console.log(loggedIn);
+  const doubleAuthActive = userStore.getDoubleAuthSetup;
+
+  // list of pages accessible when logged out
+  const publicPages = ["/login", "/register", "/about", "/cart", "/formules", "/", "/payment-accepted", "/payment-refused", 'double-auth-qrcode'];
+  const authRequired = !publicPages.includes(to.path);
 
   // redirect to login page if not logged in and trying to access a restricted page
   if (authRequired && !loggedIn) {
     return next("/login");
   }
 
+  // list of pages innaccessible when logged in
+  const notAccessiblePagesLoggedin = ["/login", "/register"];
+  const loggedInPages = notAccessiblePagesLoggedin.includes(to.path);
+
   // redirect to home page if logged in and trying to access login or register page
-  else if (loggedIn && loggedInPages) {
+  if (loggedIn && loggedInPages) {
+    console.log('logged in and trying to access login or register page');
     return next("/");
   }
 
+  // block every page if double auth is required 
+  const doubleAuthRequiredPages = ["/double-auth-qrcode"];
+  const doubleAuthRequired = !doubleAuthRequiredPages.includes(to.path);
+
   // if double auth is not active, force user to activate it
-  else if (doubleAuthRequired && loggedIn && !doubleAuthActive) {
+  if (doubleAuthRequired && loggedIn && doubleAuthActive) {
+    console.log('double auth required and active');
     return next("/double-auth-qrcode");
   }
 
-  else if (doubleAuthRequired && loggedIn && doubleAuthActive) {
-    return next('/profile');
-  }
- 
   next();
-
 });
 
 export default router;

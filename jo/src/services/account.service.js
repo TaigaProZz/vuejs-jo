@@ -4,14 +4,17 @@ import getUser from './user.service.js';
 
 export async function login (credentials) {
   try {
-    await axiosBase().post('/auth/login', credentials);
+    const res = await axiosBase().post('/auth/login', credentials);
+    if (res.data === '2fa is not activated.') {
+      throw ('2FA n\'est pas activé.');
+    }
     return await getUser();
   } catch (error) {
     throw error;
   }
 }
 
-export async function verifyOtp (otp) { 
+export async function verifyOtp (otp) {
   try {
     return await axiosBase().post('/auth/2fa/verify', { token: otp });
   } catch (error) {

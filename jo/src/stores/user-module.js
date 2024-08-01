@@ -4,6 +4,7 @@ export const useUserStore = defineStore('userStore', {
   state: () => ({
     user: {},
     isLoggedIn: false,
+    doubleAuthSetup: false,
   }),
   getters: {
     getUser(state) {
@@ -11,7 +12,10 @@ export const useUserStore = defineStore('userStore', {
     },
     getIsLoggedIn(state) {
       return state.isLoggedIn;
-    }
+    },
+    getDoubleAuthSetup(state) {
+      return state.doubleAuthSetup;
+    },
   },
   actions: {
     addUser(data) {
@@ -23,6 +27,13 @@ export const useUserStore = defineStore('userStore', {
     async logUser(data) {
       this.addUser(data);
       this.handleIsLoggedIn(true);
+    },
+    handleDoubleAuthSetup(state) {
+      this.doubleAuthSetup = state;
+      this.isLoggedIn = state;
+    },
+    handleRemoveDoubleAuthSetup() {
+      this.doubleAuthSetup = false;
     },
     async logoutUser() {
       this.addUser({});

@@ -29,13 +29,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useUserStore, ['logUser']),
+    ...mapActions(useUserStore, ['logUser', 'handleDoubleAuthSetup']),
     async fetchUser() {
       try {
         this.isLoading = true
         const response = await getUser()
         this.logUser(response);
-      } catch (error) {}
+      } catch (error) {
+        if(error.response.data.message === '2fa is not activated') {
+          this.handleDoubleAuthSetup(true);
+        }
+      }
         finally {
         this.isLoading = false;
       } 

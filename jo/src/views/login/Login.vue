@@ -87,7 +87,7 @@ export default {
         // handle errors
 
         // if email or password is incorrect
-        if (error.response.data.message === 'Veuillez vérifier vos identifiants de connexion.') {
+        if (error?.response?.data?.message === 'Veuillez vérifier vos identifiants de connexion.') {
           showErrorPopup('Email ou mot de passe incorrect.');
         }
 
@@ -99,13 +99,13 @@ export default {
         }
 
         // if 2fa is activated, display otp code input
-        if (error.response.data.message === '2fa code needed.') {
+        if (error?.response?.data?.message === '2fa code needed.') {
           console.log('2fa code needed.');
           return this.otpCodeVerification = true;
         } 
 
         // if 2fa code is incorrect
-        if (error.response.data.message === 'Invalid 2fa token.') {
+        if (error?.response?.data?.message === 'Invalid 2fa token.') {
           showErrorPopup('Code de vérification incorrect.');
         }
       }

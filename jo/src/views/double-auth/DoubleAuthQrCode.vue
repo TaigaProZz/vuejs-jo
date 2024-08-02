@@ -4,6 +4,7 @@
     <div class="flex flex-col gap-6">
       <div class="flex flex-col gap-6">
         <p>Scannez le QR code ci-dessous avec votre application d'authentification</p>
+        <p>Le QR code sera régénéré à chaque connexion tant que vous ne l'avez pas activé.</p>
         <img :src="qrcode" alt="qrcode" class="w-3/12"/>
       </div>
       <form :onSubmit="formHandler" class="flex flex-col gap-4 w-6/12">
@@ -86,7 +87,6 @@ export default {
       } catch (error) {
         showErrorPopup('Code de vérification incorrect.');
       }
-      console.log(res);
     }
   },
 }

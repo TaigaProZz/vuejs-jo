@@ -1,8 +1,8 @@
 <template>
-<div class="h-[50rem] flex items-center justify-center">
+<div class="h-[32rem] sm:h-[50rem] flex items-center justify-center">
   <!-- form -->
   <form
-    class="rounded-lg flex justify-between items-center px-10 pt-10 pb-6 flex-col h-[30rem] w-full md:w-96 bg-radial-custom-gradient drop-shadow-[0_4px_8px_rgba(0,0,0,0.65)]"
+    class="h-fit rounded-lg flex justify-between items-center gap-6 px-4 sm:px-10 pt-10 pb-6 flex-col h-[30rem] w-full sm:w-96 bg-radial-custom-gradient drop-shadow-[0_4px_8px_rgba(0,0,0,0.65)]"
     :onSubmit="formHandler">
     <div v-if="!otpCodeVerification" class="w-full flex flex-col items-center gap-6">
       <h1 class="text-2xl font-bold drop-shadow-[0_6px_8px_rgba(0,0,0,0.)]">Se connecter</h1>
@@ -17,7 +17,7 @@
       <InputForm type="text" label="Code de vérification" placeholder="Entrez le code de vérification" v-model="otpCode" />
     </div>
 
-    <div class="w-full flex flex-col items-center gap-2">
+    <div class="gap-3 w-full flex flex-col items-center text-center">
       <!-- login btn -->
       <PrimaryButton :text="otpCodeVerification ? 'Se connecter' : 'Continuer'" type="submit" />
       

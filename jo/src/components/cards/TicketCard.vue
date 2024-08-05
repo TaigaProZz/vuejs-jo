@@ -54,11 +54,6 @@ export default {
     ...mapState(useUserStore, ['isLoggedIn']),
     ...mapState(useCartStore, ['cart']),
   },
-  mounted() {
-    if (this.cart) {
-      this.cartIsFull = true;
-    }
-  },
   methods: {
     async buy() {
       try {
@@ -72,9 +67,17 @@ export default {
       }
     },
     addCart() {
-      if(this.cartIsFull && !this.confirmButton) {
+      // check if cart is already full
+      if (Object.keys(this.cart).length !== 0) {
+        this.cartIsFull = true;
+      }
+
+      // if cart is full and confirm button is not already clicked
+      if (this.cartIsFull && !this.confirmButton) {
         return this.confirmButton = true;
       }
+
+      // when ticket is added to cart
       showSuccessPopup('Ticket ajouté au panier');
       this.confirmButton = false;
       return this.$emit('add-cart', this.ticket);

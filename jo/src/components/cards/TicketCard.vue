@@ -16,10 +16,10 @@
   <!--  description  -->
   <p class="h-full text-[14px]">{{ ticket.description }}</p>
   <!--  buy button  -->
-  <div class="flex flex-col gap-[15px] text-center">
+  <div class="flex flex-col gap-[15px] text-center items-center">
     <PrimaryButton text="Acheter" @click="buy" />
     <!--  add to cart  -->
-    <p class="cursor-pointer" @click="addCart">Ajouter au panier</p>
+    <p class="cursor-pointer" @click="addCart">{{ !confirmButton ? 'Ajouter au panier' : 'Panier plein. Ajouter quand même?'}}</p>
   </div>
 </div>
 </template>
@@ -27,9 +27,11 @@
 <script>
 import { mapState } from "pinia";
 import { useUserStore } from '@/stores/user-module';
+import { useCartStore } from '@/stores/cart-module';
+
 import PrimaryButton from "../buttons/PrimaryButton.vue";
 import { buyTicket } from "../../services/ticket.service";
-import { showErrorPopup } from "../../utils/toast/toast";
+import { showErrorPopup, showSuccessPopup } from "../../utils/toast/toast";
 
 export default {
   name: 'TicketCard',
@@ -42,8 +44,20 @@ export default {
       default: {}
     }
   },
+  data() {
+    return {
+      cartIsFull: false,
+      confirmButton: false,
+    }
+  },
   computed: {
-    ...mapState(useUserStore, ['isLoggedIn'])
+    ...mapState(useUserStore, ['isLoggedIn']),
+    ...mapState(useCartStore, ['cart']),
+  },
+  mounted() {
+    if (this.cart) {
+      this.cartIsFull = true;
+    }
   },
   methods: {
     async buy() {
@@ -58,7 +72,12 @@ export default {
       }
     },
     addCart() {
-      this.$emit('add-cart', this.ticket);
+      if(this.cartIsFull && !this.confirmButton) {
+        return this.confirmButton = true;
+      }
+      showSuccessPopup('Ticket ajouté au panier');
+      this.confirmButton = false;
+      return this.$emit('add-cart', this.ticket);
     }
   }
   

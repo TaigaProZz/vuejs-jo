@@ -10,6 +10,15 @@ async function fetchTickets() {
   }
 }
 
+async function fetchOneTicket(id) { 
+  try {
+    const response = await axiosBase().get(`/ticket/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 /*
   * to redirect to stripe to buy a ticket
   * @param {string} id - Stripe id of the ticket
@@ -27,4 +36,4 @@ async function buyTicket(id) {
   }
 }
 
-export { fetchTickets, buyTicket };
+export { fetchTickets, buyTicket, fetchOneTicket };

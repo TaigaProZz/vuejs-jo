@@ -22,7 +22,7 @@
     <!--  day 1  -->
     <section class="flex flex-col gap-[56px]">
       <h2 class="font-bold text-3xl">Jour 1</h2>
-      <div class="flex flex-col flex-wrap items-center lg:flex-row gap-[20px] md:gap-[20px] lg:gap-[40px] md:ml-8">
+      <div class="flex flex-col flex-wrap items-center lg:flex-row gap-[20px] md:gap-[20px] lg:gap-[40px]">
         <SportCard v-for="(item, index) in dayOneSports" :key="index" :sport="item" />
       </div>
     </section>
@@ -30,7 +30,7 @@
     <!--  day 2  -->
     <section class="flex flex-col gap-[56px]">
       <h2 class="font-bold text-3xl">Jour 2</h2>
-      <div class="flex flex-col flex-wrap items-center lg:flex-row gap-[20px] md:gap-[20px] lg:gap-[40px] md:ml-8">
+      <div class="flex flex-col flex-wrap items-center lg:flex-row gap-[20px] md:gap-[20px] lg:gap-[40px]">
         <SportCard v-for="(item, index) in dayTwoSports" :key="index" :sport="item" />
       </div>
     </section>
@@ -60,37 +60,19 @@ export default {
           id: 1,
           title: "Athlétisme",
           hour: "10h00",
-          imgSrc: "../../assets/sports/athletics.jpg"
+          imgSrc: "src/assets/sports/athletics.jpg"
         },
         {
           id: 2,
           title: "Natation",
           hour: "13h00",
-          imgSrc: "/assets/sports/pool.jpg"
+          imgSrc: "src/assets/sports/pool.jpg"
         },
         {
           id: 3,
           title: "Tir à l'arc",
           hour: "16h00",
-          imgSrc: "/assets/sports/archery.jpg"
-        },
-        {
-          id: 4,
-          title: "Athlétisme",
-          hour: "10h00",
-          imgSrc: "/assets/sports/athletics.jpg"
-        },
-        {
-          id: 5,
-          title: "Natation",
-          hour: "13h00",
-          imgSrc: "/assets/sports/pool.jpg"
-        },
-        {
-          id: 6,
-          title: "Tir à l'arc",
-          hour: "16h00",
-          imgSrc: "/assets/sports/archery.jpg"
+          imgSrc: "src/assets/sports/archery.jpg"
         },
       ],
       dayTwoSports: [
@@ -98,37 +80,19 @@ export default {
           id: 1,
           title: "Cyclysme",
           hour: "10h00",
-          imgSrc: "/assets/sports/cyclisme.webp"
+          imgSrc: "src/assets/sports/cyclisme.webp"
         },
         {
           id: 2,
           title: "Basket 3c3",
           hour: "13h00",
-          imgSrc: "/assets/sports/basket.jpg"
+          imgSrc: "src/assets/sports/basket.jpg"
         },
         {
           id: 3,
           title: "Golf",
           hour: "16h00",
-          imgSrc: "/assets/sports/golf.jpg"
-        },
-        {
-          id: 4,
-          title: "Athlétisme",
-          hour: "10h00",
-          imgSrc: "/assets/sports/athletics.jpg"
-        },
-        {
-          id: 5,
-          title: "Natation",
-          hour: "13h00",
-          imgSrc: "/assets/sports/pool.jpg"
-        },
-        {
-          id: 6,
-          title: "Tir à l'arc",
-          hour: "16h00",
-          imgSrc: "/assets/sports/archery.jpg"
+          imgSrc: "src/assets/sports/golf.jpg"
         },
       ]
     }

@@ -35,6 +35,24 @@
       </div>
     </section>
   </div>
+  <div class="flex flex-col lg:flex-row gap-6">
+    <div>
+      <MainTitle class="mt-0 mb-6" title="A propos" />
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d656.189485344938!2d2.287525433947544!3d48.86282602613075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fe4ae702e43%3A0xc3cf0dea2d7a2450!2sCit%C3%A9%20de%20l&#39;architecture%20et%20du%20patrimoine%2C%201%20Pl.%20du%20Trocad%C3%A9ro%20et%20du%2011%20Novembre%2C%2075016%20Paris!5e0!3m2!1sfr!2sfr!4v1723217884857!5m2!1sfr!2sfr"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+   
+    <div class="lg:mt-20">
+      <h3>Besoin d'aide ?</h3>
+      <p class="mt-6">Vous pouvez nous contacter par mail à l'adresse suivante : <a class="underline" href="mailto:dummy@email.fr">dummy@email.fr</a></p> 
+      <p class="mt-2">Vous pouvez également nous contacter par téléphone au : <a class="underline" href="tel:+33123456789">01 23 45 67 89</a></p>
+          
+    </div>
+  </div>
+  
 </div>
 </template>
 

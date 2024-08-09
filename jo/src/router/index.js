@@ -14,7 +14,6 @@ const routes = [
   { path: "/transactions", name: "transactions", component: () => import("../views/account-views/AccountViews.vue") },
   { path: "/payment-accepted", name: "PaymentAccepted", component: () => import("../views/payment-status/PaymentAccepted.vue") },
   { path: "/payment-refused", name: "PaymentRefused", component: () => import("../views/payment-status/PaymentRefused.vue") },
-  { path: "/:pathMatch(.*)*", name: "404", component: () => import("../views/404/404.vue")}
 ];
 
 const router = createRouter({

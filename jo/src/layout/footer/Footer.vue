@@ -38,10 +38,10 @@ export default  {
         { name: "Conditions générale de vente", href: "/cgv" },
         { name: "Conditions générale d'utilisation", href: "/cgu" },
         { name: "Politique de confidentialité", href: "/pdc" },
-        { name: "Conditions générale de vente", href: "/cgv" },
+        // { name: "Conditions générale de vente", href: "/cgv" },
       ],
       secondSideElements: [
-        { name: "A propos", href: "/about" },
+        // { name: "A propos", href: "/about" },
         { name: "Formules", href: "/formules" },
         { name: "Mon profil", href: "/profile" },
         { name: "© Copyright 2024. Made by Taiga ProZz", href: "https://github.com/taigaprozz/" },

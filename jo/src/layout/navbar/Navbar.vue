@@ -19,7 +19,7 @@
 
     <!-- navigation items -->
     <div class="navbar-content hidden sm:flex gap-4 justify-center">
-      <template v-for="(item, index) in navItems.slice(1, 3)" :key="index">
+      <template v-for="(item, index) in navItems.slice(1, 2)" :key="index">
         <div :class="['navbar-item', { 'active': pathname === item.href }]">
           <RouterLink class="h-full flex items-center hover:text-creme" :to="item.href">
             {{ item.name }}
@@ -144,7 +144,7 @@ export default {
       navItems: [
         { name: 'Accueil', href: '/' },
         { name: 'Formules', href: '/formules' },
-        { name: 'A propos', href: '/about' },
+        // { name: 'A propos', href: '/about' },
         { name: 'Se connecter', href: '/login' },
         { name: "S'inscrire", href: '/register' }
       ],

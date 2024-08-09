@@ -8,7 +8,7 @@ const routes = [
   { path: "/double-auth-qrcode", name: "DoubleAuthQrCode", component: () => import("../views/double-auth/DoubleAuthQrCode.vue") },
 
   { path: "/register", name: "register", component: () => import("../views/register/Register.vue") },
-  { path: "/about", name: "about", component: () => import("../views/about/About.vue") },
+  // { path: "/about", name: "about", component: () => import("../views/about/About.vue") },
   { path: "/cart", name: "cart", component: () => import("../views/account-views/AccountViews.vue") },
   { path: "/profile", name: "profile", component: () => import("../views/account-views/AccountViews.vue") },
   { path: "/transactions", name: "transactions", component: () => import("../views/account-views/AccountViews.vue") },
@@ -18,8 +18,6 @@ const routes = [
   { path: "/cgu", name: "Cgu", component: () => import("../views/cgu/Cgu.vue") },
   { path: "/cgv", name: "Cgv", component: () => import("../views/cgv/Cgv.vue") },
   { path: "/pdc", name: "PolitiqueConfidentialite", component: () => import("../views/politique-confidentialite/PolitiqueConfidentialite.vue") },
-
-
 ];
 
 const router = createRouter({
@@ -34,7 +32,7 @@ router.beforeResolve((to, from, next) => {
   const doubleAuthActive = userStore.getDoubleAuthSetup;
 
   // list of pages accessible when logged out
-  const publicPages = ["/login", "/register", "/about", "/cart", "/formules", "/", "/payment-accepted", "/payment-refused", 'double-auth-qrcode', '/cgu', '/cgv', '/pdc'];
+  const publicPages = ["/login", "/register", "/cart", "/formules", "/", "/payment-accepted", "/payment-refused", 'double-auth-qrcode', '/cgu', '/cgv', '/pdc'];
   const authRequired = !publicPages.includes(to.path);
 
   // redirect to login page if not logged in and trying to access a restricted page
@@ -48,7 +46,6 @@ router.beforeResolve((to, from, next) => {
 
   // redirect to home page if logged in and trying to access login or register page
   if (loggedIn && loggedInPages) {
-    console.log('logged in and trying to access login or register page');
     return next("/");
   }
 

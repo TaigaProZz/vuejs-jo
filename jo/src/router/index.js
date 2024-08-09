@@ -14,6 +14,12 @@ const routes = [
   { path: "/transactions", name: "transactions", component: () => import("../views/account-views/AccountViews.vue") },
   { path: "/payment-accepted", name: "PaymentAccepted", component: () => import("../views/payment-status/PaymentAccepted.vue") },
   { path: "/payment-refused", name: "PaymentRefused", component: () => import("../views/payment-status/PaymentRefused.vue") },
+
+  { path: "/cgu", name: "Cgu", component: () => import("../views/cgu/Cgu.vue") },
+  { path: "/cgv", name: "Cgv", component: () => import("../views/cgv/Cgv.vue") },
+  { path: "/pdc", name: "PolitiqueConfidentialite", component: () => import("../views/politique-confidentialite/PolitiqueConfidentialite.vue") },
+
+
 ];
 
 const router = createRouter({
@@ -28,7 +34,7 @@ router.beforeResolve((to, from, next) => {
   const doubleAuthActive = userStore.getDoubleAuthSetup;
 
   // list of pages accessible when logged out
-  const publicPages = ["/login", "/register", "/about", "/cart", "/formules", "/", "/payment-accepted", "/payment-refused", 'double-auth-qrcode'];
+  const publicPages = ["/login", "/register", "/about", "/cart", "/formules", "/", "/payment-accepted", "/payment-refused", 'double-auth-qrcode', '/cgu', '/cgv', '/pdc'];
   const authRequired = !publicPages.includes(to.path);
 
   // redirect to login page if not logged in and trying to access a restricted page

@@ -1,5 +1,5 @@
 <template>
-<div class="w-full flex flex-col lg:flex-row gap-16 px-8 pt-20">
+<div class="w-full flex flex-col lg:flex-row gap-16 sm:px-8 pt-20">
   <Submenu v-if="isLoggedIn" :path="path" class="w-4/12 mt-20" />
 
   <div class="w-full lg:w-8/12">

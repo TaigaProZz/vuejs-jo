@@ -106,19 +106,16 @@
 <!-- burger menu -->
 <nav v-if="isBurgerOpen" class="sm:hidden bg-grayPrimary h-full w-full mt-[85px] p-8 z-50 gap-6 absolute flex flex-col text-center">
  <template v-for="(item, index) in navItems" :key="index">
-      <div v-if="!(isLoggedIn && (item.href === '/login' || item.href === '/register'))" class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
-      <button class="w-full text-xl"
-        :class="{ 'active': pathname === item.href }"
-        @click="gotoPageBurger(item.href)" size="lg">
+    <div v-if="!(isLoggedIn && (item.href === '/login' || item.href === '/register'))" class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
+      <button class="w-full text-xl" :class="{ 'active': pathname === item.href }" @click="gotoPageBurger(item.href)" size="lg">
         {{ item.name }}
       </button>
     </div>
   </template>
 
-  <template v-if="isLoggedIn" v-for="(item, index) in dropdownItems" :key="index">
-    <div class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
-      <button class="w-full text-xl" :class="{ 'active': pathname === item.href }" @click="gotoPageBurger(item.href)"
-        size="lg">
+  <template v-for="(item, index) in dropdownItems" :key="index">
+    <div v-if="!(!isLoggedIn && (item.href === '/profile' || item.href === '/transactions'))" class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
+      <button class="w-full text-xl" :class="{ 'active': pathname === item.href }" @click="gotoPageBurger(item.href)"  size="lg">
         {{ item.name }}
       </button>
     </div>

@@ -47,7 +47,7 @@
     </div>
    
     <div class="lg:mt-32">
-      <h3>Besoin d'aide ?</h3>
+      <h3 class="font-bold">Besoin d'aide ?</h3>
       <p class="mt-6">Vous pouvez nous contacter par mail à l'adresse suivante : <a class="underline" href="mailto:dummy@email.fr">dummy@email.fr</a></p> 
       <p class="mt-2">Vous pouvez également nous contacter par téléphone au : <a class="underline" href="tel:+33123456789">01 23 45 67 89</a></p>
           

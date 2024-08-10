@@ -1,6 +1,6 @@
 <template>
 <div
-  class="flex flex-col justify-start rounded-md place-content-between gap-[14px] relative items-center bg-graySecondary h-[360px] w-[234px]  sm:w-[274px] drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)] p-[16px] pt-[32px]">
+  class="flex flex-col justify-start rounded-md place-content-between gap-[14px] relative items-center bg-graySecondary h-[360px] w-[234px]  sm:w-[274px] drop-shadow-[0_4px_8px_rgba(0,0,0,0.25)] p-[16px] pt-[26px]">
   <!--  price  -->
   <p
     class="text-[20px] h-[34px] w-[136px] top-[-16px] rounded font-bold absolute bg-lightBlue text-text2 flex justify-center items-center text-center">

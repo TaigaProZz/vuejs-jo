@@ -2,8 +2,9 @@
 <nav class="w-full px-6 py-3 md:w-8/12 flex items-center justify-between bg-transparent">
   <!-- burger menu icon -->
   <div class="sm:hidden" @click="toggleMenu">
-    <button :aria-label="isBurgerOpen ? 'Close menu' : 'Open menu'" class="sm:hidden">
-      <img src="@/assets/icons/burger-menu.svg" class="h-[30px] fill-white" />
+    <button class="sm:hidden" @click="toggleBurgerMenu">
+      <img v-if="!isBurgerOpen" src="@/assets/icons/burger-menu.svg" class="h-[30px] fill-white" />
+      <img v-else src="@/assets/icons/close.svg" class="h-[30px] fill-white" />
     </button>
   </div>
 
@@ -100,21 +101,28 @@
       </div>
     </template> 
   </div>
+</nav>
 
-  <!-- burger menu -->
-  <div v-if="isBurgerOpen" class="bg-transparent absoulte">
+<!-- burger menu -->
+<nav v-if="isBurgerOpen" class="sm:hidden bg-grayPrimary h-full w-full mt-[85px] p-8 z-50 gap-6 absolute flex flex-col text-center">
+ <template v-for="(item, index) in navItems" :key="index">
+    <div v-if="item.href !== '/login' && item.href !== '/register'" class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
+      <button class="w-full text-xl"
+        :class="{ 'active': pathname === item.href }"
+        @click="gotoPageBurger(item.href)" size="lg">
+        {{ item.name }}
+      </button>
+    </div>
+  </template>
 
-    <template v-for="(item, index) in navItems" :key="index">
-
-      <div class="navbar-menu-item" :class="{ 'active': pathname === item.href }" @click="handleMenuClose">
-        <button class="w-full"
-          :class="{ 'text-warning': index === 1, 'text-danger': index === navItems.length - 1, 'text-foreground': index !== 1 && index !== navItems.length - 1 }"
-          @click="gotoPage(item.href)" size="lg">
-          {{ item.name }}
-        </button>
-      </div>
-    </template>
-  </div>
+  <template v-if="isLoggedIn" v-for="(item, index) in dropdownItems" :key="index">
+    <div class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
+      <button class="w-full text-xl" :class="{ 'active': pathname === item.href }" @click="gotoPageBurger(item.href)"
+        size="lg">
+        {{ item.name }}
+      </button>
+    </div>
+  </template>
 </nav>
 </template>
 
@@ -160,23 +168,53 @@ export default {
     $route(to, from) {
       this.pathname = to.path;
     },
+    isBurgerOpen(val) {
+      if (val) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        this.adjustOverflow();
+      }
+    },
+    windowWidth() {
+      this.adjustOverflow();
+    }
   },
   computed: {
     ...mapState(useCartStore, ['getCart']),
+    windowWidth() {
+      return window.innerWidth;
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.adjustOverflow);
+    this.adjustOverflow();
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.adjustOverflow);
   },
   methods: {
     gotoPage(page) {
       this.$router.push(page);
       this.handleDropdownClose();
     },
+    gotoPageBurger(page) {
+      this.$router.push(page);
+      console.log(page);
+      
+      this.toggleBurgerMenu();
+    },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
-
-    handleDropdownClose ()  {
+    toggleBurgerMenu() {
+      this.isBurgerOpen = !this.isBurgerOpen;
+      if(!this.isBurgerOpen) {
+        document.body.style.overflow = 'auto';
+      }
+    },
+    handleDropdownClose() {
       this.isDropdownOpen = false;
     },
-
     handleClickOutside(event) {
       if(!this.isLoggedIn) return;
       const targetElement = this.$refs.targetElement;
@@ -184,18 +222,18 @@ export default {
         this.handleDropdownClose()
       }
     },
-
     async logoutClick() {
-      // logout logic here
       await logout();
       this.handleDropdownClose();
     },
+    adjustOverflow() {
+      if (window.innerWidth > 640) {
+        document.body.style.overflow = 'auto';
+        this.isBurgerOpen = false;
+      } else if (this.isBurgerOpen) {
+        document.body.style.overflow = 'hidden';
+      }
+    }
   },
-  // mounted() {
-  //   document.addEventListener('click', this.handleClickOutside);
-  // },
-  // beforeDestroy() {
-  //   document.removeEventListener('click', this.handleClickOutside);
-  // },
 };
 </script>

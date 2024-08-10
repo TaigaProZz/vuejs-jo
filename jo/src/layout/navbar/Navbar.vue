@@ -1,5 +1,5 @@
 <template>
-<nav class="w-full px-6 py-3 md:w-8/12 flex items-center justify-between bg-transparent">
+<nav class="w-full h-[85px] px-6 py-3 md:w-8/12 flex items-center justify-between bg-transparent">
   <!-- burger menu icon -->
   <div class="sm:hidden" @click="toggleMenu">
     <button class="sm:hidden" @click="toggleBurgerMenu">
@@ -11,7 +11,7 @@
   <!-- elements -->
   <div class="flex items-center h-full">
     <!-- logo and title -->
-    <div class="navbar-brand justify-center md:mr-6">
+    <div v-if="!isBurgerOpen" class="navbar-brand justify-center md:mr-6">
       <RouterLink class="flex items-center justify-center" to="/">
         <img :src="logo" alt="jo 2024 paris" class="" />
         <p class="font-bold text-inherit ml-3 hidden lg:flex">JO 2024</p>
@@ -48,7 +48,7 @@
     </div>
 
     <!-- user not logged in -->
-    <template v-if="!isLoggedIn">
+    <template v-if="!isLoggedIn && !isBurgerOpen">
       <div class="navbar-item hidden lg:flex" :class="{ 'active': pathname === '/login' }">
         <button class="h-full flex items-center hover:text-creme" @click="this.$router.push('/login')">
           Connexion
@@ -63,7 +63,7 @@
     <template v-else>
       <!-- avatar dropdown -->
       <!-- container -->
-      <div class="pt-2" ref="targetElement">
+      <div class="pt-2" ref="targetElement" v-if="!isBurgerOpen">
         <!-- toggle -->
         <button class="dropdown-trigger relative">
           <img src="@/assets/icons/user-ico.svg" alt="user dropdown" class="h-10 w-10 cursor-pointer" @click="toggleDropdown" />
@@ -106,7 +106,7 @@
 <!-- burger menu -->
 <nav v-if="isBurgerOpen" class="sm:hidden bg-grayPrimary h-full w-full mt-[85px] p-8 z-50 gap-6 absolute flex flex-col text-center">
  <template v-for="(item, index) in navItems" :key="index">
-    <div v-if="item.href !== '/login' && item.href !== '/register'" class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
+      <div v-if="!(isLoggedIn && (item.href === '/login' || item.href === '/register'))" class="navbar-menu-item" :class="{ 'text-creme': pathname === item.href }" @click="handleMenuClose">
       <button class="w-full text-xl"
         :class="{ 'active': pathname === item.href }"
         @click="gotoPageBurger(item.href)" size="lg">

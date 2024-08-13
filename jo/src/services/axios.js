@@ -3,7 +3,7 @@ import axios  from "axios";
 const axiosBase = (contentType = "application/json") => {
   return axios.create({
     withCredentials: true,
-    baseURL: "http://localhost:3000/",
+    baseURL: "https://nestjs-api-jo.vercel.app/",
     headers: {
       "Content-Type": contentType,
     },

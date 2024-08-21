@@ -17,12 +17,13 @@
   <hr class="w-full my-4 border-creme" />
 
   <!-- logout btn -->
-  <p class="mb-1 p-2 w-full h-full flex flex-col justify-end cursor-pointer hover:text-creme hover:bg-gray-600 rounded-lg">Déconnexion</p>
+  <button type="button" class="mb-1 p-2 w-full h-full flex flex-col justify-end cursor-pointer hover:text-creme hover:bg-gray-600 rounded-lg">Déconnexion</button>
 </div>
 </template>
 
 <script>
 import PrimaryButton from '../../components/buttons/PrimaryButton.vue';
+import { logout } from '../../services/account.service';
 
 export default {
   name: 'Submenu',
@@ -41,5 +42,10 @@ export default {
       ],
     }
   }, 
+  methods: {
+    async logoutClick() {
+      await logout();
+    },
+  }
 };
 </script>

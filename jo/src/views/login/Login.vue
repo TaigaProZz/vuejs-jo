@@ -92,20 +92,20 @@ export default {
         }
 
         // if login is successfull but 2fa is not activated
-        if (error === '2FA n\'est pas activé.') {
+        else if (error === '2FA n\'est pas activé.') {
           // update user store
           this.handleDoubleAuthSetup(true);
           return this.$router.push('/double-auth-qrcode');
         }
 
         // if 2fa is activated, display otp code input
-        if (error?.response?.data?.message === '2fa code needed.') {
+        else if (error?.response?.data?.message === '2fa code needed.') {
           console.log('2fa code needed.');
           return this.otpCodeVerification = true;
         } 
 
         // if 2fa code is incorrect
-        if (error?.response?.data?.message === 'Invalid 2fa token.') {
+        else if (error?.response?.data?.message === 'Invalid 2fa token.') {
           showErrorPopup('Code de vérification incorrect.');
         }
 

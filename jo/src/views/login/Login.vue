@@ -108,6 +108,10 @@ export default {
         if (error?.response?.data?.message === 'Invalid 2fa token.') {
           showErrorPopup('Code de vérification incorrect.');
         }
+
+        else {
+          showErrorPopup('Une erreur est survenue. Veuillez réessayer.');
+        }
       }
     }
   }

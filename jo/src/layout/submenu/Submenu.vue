@@ -17,7 +17,7 @@
   <hr class="w-full my-4 border-creme" />
 
   <!-- logout btn -->
-  <button type="button" class="mb-1 p-2 w-full h-full flex flex-col justify-end cursor-pointer hover:text-creme hover:bg-gray-600 rounded-lg">Déconnexion</button>
+  <button @click="logoutClick" type="button" class="mb-1 p-2 w-full h-full flex flex-col justify-end cursor-pointer hover:text-creme hover:bg-gray-600 rounded-lg">Déconnexion</button>
 </div>
 </template>
 

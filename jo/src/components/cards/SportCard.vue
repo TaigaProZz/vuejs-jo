@@ -4,7 +4,7 @@
   <div class="flex flex-col gap-[35px] w-full">
     <!--  image  -->
     <div class="w-full">
-      <img :src="getImageSrc(sport.imgSrc)" :alt="sport.title" width="500" height="500" class="rounded-[12px] h-36 w-full object-cover" />
+      <img :src="sport.imgSrc" :alt="sport.title" width="500" height="500" class="rounded-[12px] h-36 w-full object-cover" />
     </div>
     <div class="flex flex-col gap-1">
       <!--  name  -->
@@ -23,15 +23,5 @@ export default {
       type: Object,
     }
   },
-  data() {
-    return {
-      environment: import.meta.env.VITE_APP_NODE_ENV
-    };
-  },
-  methods: {
-    getImageSrc(imgSrc) {
-      return this.environment === 'development' ? `src/${imgSrc}` : '@/' + imgSrc;
-    }
-  }
 }
 </script>
